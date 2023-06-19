@@ -10,11 +10,7 @@ username=$(id -u -n 1000)
 builddir=$(pwd)
 
 # Update packages list and update system
-apt update
-apt upgrade -y
-
-# Install nala
-apt install nala -y
+pacman -Syu -y
 
 # Making .config and Moving config files and background to Pictures
 cd $builddir
@@ -27,9 +23,9 @@ mv user-dirs.dirs /home/$username/.config
 chown -R $username:$username /home/$username
 
 # Installing Essential Programs 
-nala install feh kitty rofi picom thunar nitrogen lxpolkit x11-xserver-utils unzip wget pulseaudio pavucontrol build-essential libx11-dev libxft-dev libxinerama-dev -y
+pacman -S feh kitty rofi picom thunar nitrogen lxpolkit x11-xserver-utils unzip wget pulseaudio pavucontrol 
 # Installing Other less important Programs
-nala install neofetch flameshot psmisc mangohud vim lxappearance papirus-icon-theme lxappearance fonts-noto-color-emoji lightdm -y
+pacman -S neofetch flameshot psmisc mangohud vim lxappearance fonts-noto-color-emoji -y
 
 # Download Nordic Theme
 cd /usr/share/themes/
@@ -58,15 +54,11 @@ cd $builddir
 rm -rf Nordzy-cursors
 
 # Install brave-browser
-nala install apt-transport-https curl -y
-curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | tee /etc/apt/sources.list.d/brave-browser-release.list
-nala update
-nala install brave-browser -y
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+yay -S brave-bin
 
-# Enable graphical login and change target from CLI to GUI
-systemctl enable lightdm
-systemctl set-default graphical.target
 
 # Beautiful bash
 git clone https://github.com/ChrisTitusTech/mybash
@@ -74,5 +66,10 @@ cd mybash
 bash setup.sh
 cd $builddir
 
-# Use nala
-bash scripts/usenala
+# Install dwm titus
+git clone https://github/christitustech/dwm-titus
+cd dwm-titus
+make
+sudo make clean install 
+
+# Use startx for dwm
