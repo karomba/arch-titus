@@ -33,7 +33,7 @@ git clone https://github.com/EliverLara/Nordic.git
 
 # Installing fonts
 cd $builddir 
-yay -S ttf-font-awesome
+pacman -S ttf-font-awesome
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
 unzip FiraCode.zip -d /home/$username/.fonts
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip
