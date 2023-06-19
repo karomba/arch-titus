@@ -23,7 +23,7 @@ mv user-dirs.dirs /home/$username/.config
 chown -R $username:$username /home/$username
 
 # Installing Essential Programs 
-pacman -S feh kitty rofi picom thunar nitrogen lxpolkit x11-xserver-utils unzip wget pulseaudio pavucontrol 
+pacman -S feh kitty rofi picom thunar nitrogen lxsession x11-xserver-utils unzip wget pulseaudio pavucontrol 
 # Installing Other less important Programs
 pacman -S neofetch flameshot psmisc mangohud vim lxappearance fonts-noto-color-emoji -y
 
@@ -33,7 +33,7 @@ git clone https://github.com/EliverLara/Nordic.git
 
 # Installing fonts
 cd $builddir 
-nala install fonts-font-awesome
+yay -S ttf-font-awesome
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
 unzip FiraCode.zip -d /home/$username/.fonts
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip
@@ -73,3 +73,5 @@ make
 sudo make clean install 
 
 # Use startx for dwm
+cp .xinitrc ~/
+cp ~/.xprofile
